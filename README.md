@@ -1,6 +1,8 @@
 # KoBERT_mecab  
+NLP Project  
 2022.11.10 ~   
 Huisoo Kim  
+in SmartM2M  
 # Introduction  
 KoBERT : open-source NLP transoformer BERT for Korean   
 mecab : open-source text segmentation library for korean   
