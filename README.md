@@ -12,4 +12,3 @@ Framework : Pytorch
 # References  
 * [SKTBrain/KoBERT](https://github.com/SKTBrain/KoBERT)  
 * [mecab-ko-dic](https://bitbucket.org/eunjeon/mecab-ko-dic/src/master/)  
-
