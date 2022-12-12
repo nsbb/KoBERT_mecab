@@ -4,9 +4,9 @@ NLP Project
 Huisoo Kim  
 in SmartM2M  
 # Introduction  
-KoBERT : open-source NLP transoformer BERT for Korean   
-mecab : open-source text segmentation library for korean   
 KoBERT + mecab   
+KoBERT : open-source NLP transoformer BERT for Korean   
+mecab : open-source text segmentation library for Korean   
 DataSet : LG_TestScript  
 Framework : Pytorch  
 # References  
