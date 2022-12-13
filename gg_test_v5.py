@@ -202,7 +202,7 @@ def main():
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
         print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
-        print(colored(j+' accuracy = '+str(percent)+'%\n','cyan',attrs=['bold','dark']))
+        print(colored(j+' accuracy = '+str(percent)+'%\n','cyan',attrs=['bold']))
 
 if __name__ == '__main__':
     main()
