@@ -5,12 +5,8 @@ from konlpy.tag import Mecab
 from kobert import get_tokenizer
 from kobert import get_pytorch_kobert_model
 from sklearn.model_selection import train_test_split
-from transformers import AdamW
-from transformers.optimization import get_cosine_schedule_with_warmup
 import torch
 from torch import nn
-import torch.nn.functional as F
-import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import gluonnlp as nlp
 import numpy as np
@@ -28,12 +24,6 @@ print(colored("LG_NLP_Project...\nModel : koBERT + mecab\nLET's GO!!!\n",'cyan',
 tt = ctime(time())
 max_len = 64
 batch_size = 64
-warmup_ratio = 0.1
-num_epochs = 100
-max_grad_norm = 1
-log_interval = 200
-learning_rate =  5e-5
-
  
 bertmodel,vocab = get_pytorch_kobert_model()
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -83,10 +73,8 @@ class BERTClassifier(nn.Module):
             out = self.dropout(pooler)
         return self.classifier(out)
 
-
 tokenizer = get_tokenizer()
 tok = nlp.data.BERTSPTokenizer(tokenizer,vocab,lower=False)
-
 
 def new_softmax(a):
     c = np.max(a)
@@ -95,11 +83,9 @@ def new_softmax(a):
     y = (exp_a/sum_exp_a) * 100
     return np.round(y, 3)
 
-def predict(predict_sentence,num_epoch):
-#model = torch.load('/toy/LG_model/kobert_model'+str(num_epoch*10)+'.pt',map_location=device)
+def predict(predict_sentence,state_path):
     model = torch.load('/toy/LG_model/kobert_model.pt',map_location=device)
-    #state=str('/toy/LG_model/kobert_model_state_0.942,opti=AdamW,max_len=63,batch_size=68,warmup_ratio=0.1,max_grad=1.pt')
-    state='/toy/LG_model/'+str(sys.argv[1])
+    state='/toy/LG_model/state/'+state_path
     model.load_state_dict(torch.load(state,map_location=device))
 
     data = [predict_sentence, '0']
@@ -185,36 +171,38 @@ def main():
     #        break
     #    predict(sentence)
     #    print('\n')
-    count = 0
-    percent=0.0
-    for i in range(len(test_sen)):
-        flag = 0
-        #print('test_sen[i] = ',test_sen[i]) #input test sentence
-        #print('predict = ',predict(str(test_sen[i]))) #predict number
-        targ = tar[int(test_label[i])] #target number
-        #print('targ = ',targ) #target number
-        res = tar[predict(str(test_sen[i]),j)] #predict number
-        i=str(i)
-        i=i.rjust(3,'0')
-        if res == targ:
-            count+=1 
-            flag = 1
-        if flag == 1:
-            ress = colored(res,'green')
-            correct=colored('correct!!','green')
-            ii = colored(i,'green')
-        else:
-            ress = colored(res,'red')
-            correct=colored('wrong!!','red')
-            ii = colored(i,'red')
-        slash = colored('/ ','yellow')
-        targg = colored(targ,'green')
-        print(ii,' target =',targg,slash,'prediction =',ress,colored(' >> ','yellow'),correct)
-    percent = (count/len(test_sen))*100
-    percent = round(percent,3)
-    print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
-    print(colored('\n'+str(j*10)+' epoch model Result :','cyan'))
-    print(colored('accuracy = '+str(percent)+'%\n','cyan',attrs=['bold','dark']))
+    path = '/toy/LG_model/state'
+    file_list=os.listdir(path)
+    for j in file_list:
+        count = 0
+        percent=0.0
+        for i in range(len(test_sen)):
+            flag = 0
+            #print('test_sen[i] = ',test_sen[i]) #input test sentence
+            #print('predict = ',predict(str(test_sen[i]))) #predict number
+            targ = tar[int(test_label[i])] #target number
+            #print('targ = ',targ) #target number
+            res = tar[predict(str(test_sen[i]),j)] #predict number
+            i=str(i)
+            i=i.rjust(3,'0')
+            if res == targ:
+                count+=1 
+                flag = 1
+            if flag == 1:
+                ress = colored(res,'green')
+                correct=colored('correct!!','green')
+                ii = colored(i,'green')
+            else:
+                ress = colored(res,'red')
+                correct=colored('wrong!!','red')
+                ii = colored(i,'red')
+            slash = colored('/ ','yellow')
+            targg = colored(targ,'green')
+            #print(ii,' target =',targg,slash,'prediction =',ress,colored(' >> ','yellow'),correct)
+        percent = (count/len(test_sen))*100
+        percent = round(percent,3)
+        print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
+        print(colored(j+' accuracy = '+str(percent)+'%\n','cyan',attrs=['bold','dark']))
 
 if __name__ == '__main__':
     main()
