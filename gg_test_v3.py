@@ -20,7 +20,7 @@ from termcolor import colored
 from time import time
 from time import ctime
 import subprocess
-
+ 
 subprocess.call(['sh','./logo.sh'])
 print(colored("LG_NLP_Project...\nModel : koBERT + mecab\nLET's GO!!!\n",'cyan',attrs=['bold','blink']))
 
