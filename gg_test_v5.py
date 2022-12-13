@@ -11,7 +11,6 @@ from torch.utils.data import Dataset, DataLoader
 import gluonnlp as nlp
 import numpy as np
 import numpy
-#from tqdm import tqdm, tqdm_notebook
 from tqdm.notebook import tqdm
 from termcolor import colored
 from time import time
