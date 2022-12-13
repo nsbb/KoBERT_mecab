@@ -28,11 +28,6 @@ print(colored("LG_NLP_Project...\nModel : koBERT + mecab\nLET's GO!!!\n",'cyan',
 tt = ctime(time())
 max_len = 64
 batch_size = 64
-warmup_ratio = 0.1
-num_epochs = 100
-max_grad_norm = 1
-log_interval = 200
-learning_rate =  5e-5
 
  
 bertmodel,vocab = get_pytorch_kobert_model()
@@ -95,7 +90,7 @@ def new_softmax(a):
     y = (exp_a/sum_exp_a) * 100
     return np.round(y, 3)
 
-def predict(predict_sentence,num_epoch):
+def predict(predict_sentence):
 #model = torch.load('/toy/LG_model/kobert_model'+str(num_epoch*10)+'.pt',map_location=device)
     model = torch.load('/toy/LG_model/kobert_model.pt',map_location=device)
     #state=str('/toy/LG_model/kobert_model_state_0.942,opti=AdamW,max_len=63,batch_size=68,warmup_ratio=0.1,max_grad=1.pt')
@@ -193,7 +188,7 @@ def main():
         #print('predict = ',predict(str(test_sen[i]))) #predict number
         targ = tar[int(test_label[i])] #target number
         #print('targ = ',targ) #target number
-        res = tar[predict(str(test_sen[i]),j)] #predict number
+        res = tar[predict(str(test_sen[i])] #predict number
         i=str(i)
         i=i.rjust(3,'0')
         if res == targ:
