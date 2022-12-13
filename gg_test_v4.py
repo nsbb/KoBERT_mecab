@@ -1,3 +1,4 @@
+import sys
 import os
 import pandas as pd
 from konlpy.tag import Mecab
@@ -97,7 +98,8 @@ def new_softmax(a):
 def predict(predict_sentence,num_epoch):
 #model = torch.load('/toy/LG_model/kobert_model'+str(num_epoch*10)+'.pt',map_location=device)
     model = torch.load('/toy/LG_model/kobert_model.pt',map_location=device)
-    state=str('/toy/LG_model/kobert_model_state_0.942,opti=AdamW,max_len=63,batch_size=68,warmup_ratio=0.1,max_grad=1.pt')
+    #state=str('/toy/LG_model/kobert_model_state_0.942,opti=AdamW,max_len=63,batch_size=68,warmup_ratio=0.1,max_grad=1.pt')
+    state='/toy/LG_model/'+str(sys.argv[1])
     model.load_state_dict(torch.load(state,map_location=device))
 
     data = [predict_sentence, '0']
