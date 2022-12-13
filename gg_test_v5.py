@@ -183,6 +183,7 @@ def main():
             i=i.rjust(3,'0')
             if res == targ:
                 count+=1 
+        slash=colored('/ ','yellow')
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
         print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
