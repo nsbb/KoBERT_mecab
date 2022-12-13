@@ -178,31 +178,16 @@ def main():
         percent=0.0
         for i in range(len(test_sen)):
             flag = 0
-            #print('test_sen[i] = ',test_sen[i]) #input test sentence
-            #print('predict = ',predict(str(test_sen[i]))) #predict number
             targ = tar[int(test_label[i])] #target number
-            #print('targ = ',targ) #target number
             res = tar[predict(str(test_sen[i]),j)] #predict number
             i=str(i)
             i=i.rjust(3,'0')
             if res == targ:
                 count+=1 
-                flag = 1
-            if flag == 1:
-                ress = colored(res,'green')
-                correct=colored('correct!!','green')
-                ii = colored(i,'green')
-            else:
-                ress = colored(res,'red')
-                correct=colored('wrong!!','red')
-                ii = colored(i,'red')
-            slash = colored('/ ','yellow')
-            targg = colored(targ,'green')
-            #print(ii,' target =',targg,slash,'prediction =',ress,colored(' >> ','yellow'),correct)
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
         print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
-        print(colored(j+' accuracy = '+str(percent)+'%\n','cyan',attrs=['bold','dark']))
+        print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
 
 if __name__ == '__main__':
     main()
