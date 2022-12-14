@@ -19,7 +19,7 @@ from tqdm import tqdm
 from time import time
 from time import ctime
 import subprocess
-  
+ 
 subprocess.call(['sh','/toy/logo.sh'])
 
 tt = ctime(time())
