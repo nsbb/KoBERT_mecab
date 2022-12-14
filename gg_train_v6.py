@@ -130,7 +130,7 @@ def main():
         data_list.append(data)
     dataset_train,dataset_test = train_test_split(data_list, test_size = 0.2, random_state = 0)
 
-    for max_len in range(60,70):
+    for max_len in range(61,65):
         for batch_size in range(60,70):
             for warmup_ratio in np.arange(0.1,0.3,0.1):
                 test_acc=0.0
@@ -149,13 +149,7 @@ def main():
                     {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
                 ]
 
-                #optimizer = Adafactor(optimizer_grouped_parameters, lr=learning_rate)
-                if opti == 1:
-                    optimizer = AdamW(optimizer_grouped_parameters,lr=learning_rate)
-                    optimizer_name = 'AdamW'
-                else:
-                    optimizer = Adafactor(optimizer_grouped_parameters,lr=learning_rate,relative_step=False)
-                    optimizer_name = 'Adafactor'
+                optimizer = Adafactor(optimizer_grouped_parameters, lr=learning_rate)
                 loss_fn = nn.CrossEntropyLoss()
 
                 t_total = len(train_dataloader) * num_epochs
@@ -203,10 +197,10 @@ def main():
                 m_path = '/toy/LG_model/'
                 test_accs = str(round(test_acc,3))
                 print('test_accs:',test_accs)
-                print(test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+',max_grad='+str(max_grad_norm))
-                if test_acc > 0.5:
+                print(test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)
+                if test_acc > 0.89:
                     #torch.save(model,m_path+'kobert_model_'+test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+',max_grad='+str(max_grad_norm)+'.pt')
-                    torch.save(model.state_dict(),m_path+'kobert_model_state_'+test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+',max_grad='+str(max_grad_norm)+'.pt')
+                    torch.save(model.state_dict(),m_path+'kobert_model_state_'+test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+'.pt')
 
 if __name__ == '__main__':
     main()
