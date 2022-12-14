@@ -193,7 +193,7 @@ def main():
                     test_acc=test_acc/(batch_id+1)
                     #print("epoch {} test acc {}".format(e+1, test_acc / (batch_id+1)))
                     print("epoch {} test acc {}".format(e+1, test_acc))
-                m_path = '/toy/LG_model/state2'
+                m_path = '/toy/LG_model/state2/'
                 test_accs = str(round(test_acc,3))
                 print('test_accs:',test_accs)
                 print(test_accs+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio))
