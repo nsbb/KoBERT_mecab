@@ -5,7 +5,6 @@ from kobert import get_tokenizer
 from kobert import get_pytorch_kobert_model
 from sklearn.model_selection import train_test_split
 from transformers import AdamW
-from transformers import Adafactor
 from transformers.optimization import get_cosine_schedule_with_warmup
 import torch
 from torch import nn
@@ -149,7 +148,7 @@ def main():
                     {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
                 ]
 
-                optimizer = Adafactor(optimizer_grouped_parameters, lr=learning_rate)
+                optimizer = AdamW(optimizer_grouped_parameters, lr=learning_rate)
                 loss_fn = nn.CrossEntropyLoss()
 
                 t_total = len(train_dataloader) * num_epochs
@@ -197,9 +196,9 @@ def main():
                 m_path = '/toy/LG_model/state2'
                 test_accs = str(round(test_acc,3))
                 print('test_accs:',test_accs)
-                print(test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)
-                if test_acc > 0.89:
-                    torch.save(model.state_dict(),m_path+'kobert_model_state_'+test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+'.pt')
+                print(test_accs+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio))
+                if test_acc >= 0.9:
+                    torch.save(model.state_dict(),m_path+'kobert_state_'+test_accs+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+'.pt')
 
 if __name__ == '__main__':
     main()
