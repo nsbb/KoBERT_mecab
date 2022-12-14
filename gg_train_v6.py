@@ -194,12 +194,11 @@ def main():
                     test_acc=test_acc/(batch_id+1)
                     #print("epoch {} test acc {}".format(e+1, test_acc / (batch_id+1)))
                     print("epoch {} test acc {}".format(e+1, test_acc))
-                m_path = '/toy/LG_model/'
+                m_path = '/toy/LG_model/state2'
                 test_accs = str(round(test_acc,3))
                 print('test_accs:',test_accs)
                 print(test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)
                 if test_acc > 0.89:
-                    #torch.save(model,m_path+'kobert_model_'+test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+',max_grad='+str(max_grad_norm)+'.pt')
                     torch.save(model.state_dict(),m_path+'kobert_model_state_'+test_accs+',opti='+str(optimizer_name)+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+'.pt')
 
 if __name__ == '__main__':
