@@ -170,7 +170,7 @@ def main():
     #        break
     #    predict(sentence)
     #    print('\n')
-    path = '/toy/LG_model/state'
+    path = '/toy/LG_model/state2'
     file_list=os.listdir(path)
     for j in file_list:
         count = 0
@@ -186,7 +186,7 @@ def main():
         slash=colored('/ ','yellow')
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
-        print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
+        #print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
         print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
 
 if __name__ == '__main__':
