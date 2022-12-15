@@ -84,7 +84,7 @@ def new_softmax(a):
 
 def predict(predict_sentence,state_path):
     model = torch.load('/toy/LG_model/kobert_model.pt',map_location=device)
-    state='/toy/LG_model/state/'+state_path
+    state='/toy/LG_model/state2/'+state_path
     model.load_state_dict(torch.load(state,map_location=device))
 
     data = [predict_sentence, '0']
@@ -170,7 +170,7 @@ def main():
     #        break
     #    predict(sentence)
     #    print('\n')
-    path = '/toy/LG_model/state'
+    path = '/toy/LG_model/state2'
     file_list=os.listdir(path)
     for j in file_list:
         count = 0
@@ -186,8 +186,8 @@ def main():
         slash=colored('/ ','yellow')
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
-        print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
         print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
+        os.rename(j,percent+'% '+j)
 
 if __name__ == '__main__':
     main()
