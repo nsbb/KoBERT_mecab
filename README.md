@@ -1,6 +1,6 @@
 # KoBERT_mecab  
 NLP Project  
-2022.11.10 ~   
+2022.11.10  
 Huisoo Kim  
 # Introduction  
 KoBERT + mecab   
