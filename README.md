@@ -2,7 +2,6 @@
 NLP Project  
 2022.11.10 ~   
 Huisoo Kim  
-in SmartM2M  
 # Introduction  
 KoBERT + mecab   
 KoBERT : open-source NLP transoformer BERT for Korean   
