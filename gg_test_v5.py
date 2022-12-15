@@ -188,6 +188,6 @@ def main():
         percent = round(percent,3)
         #print('correct_answers =',colored(count,'blue'),slash,'test_data =',colored(len(test_sen),'blue'))
         print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
-
+ 
 if __name__ == '__main__':
     main()
