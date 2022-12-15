@@ -84,7 +84,7 @@ def new_softmax(a):
 
 def predict(predict_sentence,state_path):
     model = torch.load('/toy/LG_model/kobert_model.pt',map_location=device)
-    state='/toy/LG_model/state2/'+state_path
+    state='/toy/LG_model/state/'+state_path
     model.load_state_dict(torch.load(state,map_location=device))
 
     data = [predict_sentence, '0']
@@ -170,7 +170,7 @@ def main():
     #        break
     #    predict(sentence)
     #    print('\n')
-    path = '/toy/LG_model/state2'
+    path = '/toy/LG_model/state'
     file_list=os.listdir(path)
     for j in file_list:
         count = 0
