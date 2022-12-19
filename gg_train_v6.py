@@ -199,6 +199,6 @@ def main():
                 print(test_accs+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio))
                 if test_acc >= 0.9:
                     torch.save(model.state_dict(),m_path+'kobert_state_'+test_accs+',max_len='+str(max_len)+',batch_size='+str(batch_size)+',warmup_ratio='+str(warmup_ratio)+'.pt')
-
+ 
 if __name__ == '__main__':
     main()
