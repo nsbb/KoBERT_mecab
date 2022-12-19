@@ -126,7 +126,8 @@ def main():
     file_list = os.listdir(path)
     d_test , d_result , d_target , d_target_num = [], [], [], []
     for file in file_list:
-        xl = pd.ExcelFile(path+file)
+        #xl = pd.ExcelFile(path+filei)
+        xl = pd.ExcelFile(path+file,engine='openpyxl')
         t_test=[]
         t_result=[]
         for i in range(1,len(xl.sheet_names)):
@@ -170,7 +171,7 @@ def main():
     #        break
     #    predict(sentence)
     #    print('\n')
-    path = '/toy/LG_model/state2'
+    path = '/toy/LG_model/state2/'
     file_list=os.listdir(path)
     for j in file_list:
         count = 0
@@ -187,7 +188,7 @@ def main():
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
         print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
-        os.rename(path+j,path+str(percent)+'% '+j)
+        #os.rename(path+j,path+str(percent)+'% '+j)
 
 if __name__ == '__main__':
     main()
