@@ -187,7 +187,7 @@ def main():
         percent = (count/len(test_sen))*100
         percent = round(percent,3)
         print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
-        os.rename(j,str(percent)+'% '+j)
+        os.rename(path+j,path+str(percent)+'% '+j)
 
 if __name__ == '__main__':
     main()
