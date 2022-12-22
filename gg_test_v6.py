@@ -190,5 +190,6 @@ def main():
         print(colored(j+' accuracy = '+str(percent)+'%','cyan',attrs=['bold']))
         #os.rename(path+j,path+str(percent)+'% '+j)
 
+ 
 if __name__ == '__main__':
     main()
